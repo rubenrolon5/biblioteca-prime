@@ -11,18 +11,17 @@ export class AppComponent {
     label: "Biblioteca ",
     icon: PrimeIcons.BOOK,
     items: [
-      {
-        label: "Biblioteca",
-        icon: PrimeIcons.BOOKMARK
-      },
+      
 
       {
         label: "Libros",
-        icon: PrimeIcons.BOOKMARK
+        icon: PrimeIcons.BOOKMARK,
+        routerLink:['libros']
       },
       {
         label: "Autores",
-        icon: PrimeIcons.BOOKMARK
+        icon: PrimeIcons.USERS,
+        routerLink:['autores']
       }
 
     ]

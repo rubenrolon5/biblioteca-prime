@@ -9,12 +9,21 @@ import {ButtonModule} from 'primeng/button';
 import { AutoresComponent } from './autores/autores.component';
 import { LibrosComponent } from './libros/libros.component';
 import { HttpClientModule } from '@angular/common/http';
-
-@NgModule({
+import { BrowserAnimationsModule} from'@angular/platform-browser/animations';
+import {CardModule} from 'primeng/card';
+import {DialogModule} from'primeng/dialog';
+import { FormularioLibroComponent } from './libro/formulario-libro/formulario-libro.component';
+import { InputTextModule} from 'primeng/inputtext';
+import {InputNumberModule} from 'primeng/inputnumber';
+import { MessageModule } from 'primeng/message';
+import { MessagesModule} from 'primeng/messages';
+import {FormsModule} from '@angular/forms';
+  @NgModule({
   declarations: [
     AppComponent,
     AutoresComponent,
-    LibrosComponent
+    LibrosComponent,
+    FormularioLibroComponent
   ],
   imports: [
     BrowserModule,
@@ -23,7 +32,15 @@ import { HttpClientModule } from '@angular/common/http';
     ButtonModule,
     MenubarModule,
     TableModule,
-    HttpClientModule
+    HttpClientModule,
+    CardModule,
+    DialogModule,
+    BrowserAnimationsModule,
+  InputTextModule,
+  InputNumberModule,
+  FormsModule,
+  MessageModule,
+  MessagesModule
   ],
   providers: [],
   bootstrap: [AppComponent]

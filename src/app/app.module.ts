@@ -18,6 +18,7 @@ import {InputNumberModule} from 'primeng/inputnumber';
 import { MessageModule } from 'primeng/message';
 import { MessagesModule} from 'primeng/messages';
 import {FormsModule} from '@angular/forms';
+
   @NgModule({
   declarations: [
     AppComponent,
@@ -40,7 +41,8 @@ import {FormsModule} from '@angular/forms';
   InputNumberModule,
   FormsModule,
   MessageModule,
-  MessagesModule
+  MessagesModule,
+  
   ],
   providers: [],
   bootstrap: [AppComponent]

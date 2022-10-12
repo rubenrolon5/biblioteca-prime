@@ -26,7 +26,9 @@
     <small *ngIf="!codigoValido" id="codigo-help" class="p-error block">Ingresar la cantidad de paginas del libro</small>
 </div>
 <div class="field">
-    <button pButton label="Guardar" icon="pi pi-save" (click)="guardar()"[loading]="guardando"></button>
-    <button pButton label="Limpiar" icon="pi pi-trash" class="p-button-secondary"style="margin-left: 10px"(click)="limpiarFormulario()"></button>
+    <button pButton label="Guardar" icon="pi pi-save" 
+    (click)="guardar()"[loading]="guardando"></button>
+    <button pButton label="Limpiar" icon="pi pi-trash" 
+    class="p-button-secondary"style="margin-left: 10px"(click)="limpiarFormulario()"></button>
 </div>
 <p-messages [(value)]="mensajes"></p-messages>

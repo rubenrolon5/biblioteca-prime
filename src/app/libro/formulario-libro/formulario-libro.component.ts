@@ -22,14 +22,12 @@ export class FormularioLibroComponent implements OnInit {
   guardando: boolean = false;
   mensajes: Message[] = [];
 
+  modo: 'Registrar' | 'Editar' = 'Registrar';
   @Output()
-recargarLibros: EventEmitter <boolean> = new EventEmitter();
-
+  recargarLibros: EventEmitter<boolean> = new EventEmitter();
 
   constructor(
-
-    private servicioLibros: LibrosService
-  ) { }
+    private servicioLibros: LibrosService) { }
 
   ngOnInit(): void {
   }
@@ -41,22 +39,43 @@ recargarLibros: EventEmitter <boolean> = new EventEmitter();
         autor: this.autor,
         paginas: this.paginas
       }
-      this.guardando = true;
-      this.servicioLibros.post(libro).subscribe({
-        next: () => {
-          this.guardando = true;
-          this.mensajes = [{ severity: 'success', summary: 'Exito', detail: 'Se registro el libro' }];
-          this.recargarLibros.emit(true);
-        },
-        error: (e) => {
-          this.guardando = false;
-          console.log(e);
-          this.mensajes = [{ severity: 'error', summary: 'error al registrar', detail: 'e.error' }];
-        }
-      });
+      if (this.modo === 'Registrar') {
+        this.registrar(libro);
+      } else {
+        this.editar(libro);
+      }
     }
   }
-
+  private registrar(libro: Libro) {
+    this.guardando = true;
+    this.servicioLibros.post(libro).subscribe({
+      next: () => {
+        this.guardando = false;
+        this.mensajes = [{severity: 'success', summary: 'Exito', detail: 'Se registro el libro' }];
+        this.recargarLibros.emit(true);
+      },
+      error: (e) => {
+        this.guardando = false;
+        console.log(e);
+        this.mensajes = [{severity: 'error', summary: 'error al registrar', detail: 'e.error' }];
+      }
+    });
+  }
+  private editar(libro: Libro) {
+    this.guardando = true;
+    this.servicioLibros.put(libro).subscribe({
+      next: () => {
+        this.guardando = false;
+        this.mensajes = [{severity: 'success', summary: 'Exito', detail: 'Se edito el libro' }]
+        this.recargarLibros.emit(true);
+      },
+      error: (e) => {
+        this.guardando = false;
+        console.log(e);
+        this.mensajes = [{severity: 'error', summary: 'Error al editar libro', detail: e.error }];
+      }
+    });
+  }
   validar(): boolean {
     this.codigoValido = this.codigo !== null//estamos llamando a que ejecute estas funciones
     this.tituloValido = this.titulo !== null && this.titulo?.length > 0;
@@ -64,11 +83,11 @@ recargarLibros: EventEmitter <boolean> = new EventEmitter();
     this.paginasValido = this.paginas !== null;
     return this.codigoValido && this.tituloValido && this.autorValido && this.paginasValido;
   }
-  limpiarFormulario(){
-    this.codigo=null;
-    this.titulo=null;
-    this.autor=null;
-    this.paginas=null;
+  limpiarFormulario() {
+    this.codigo = null;
+    this.titulo = null;
+    this.autor = null;
+    this.paginas = null;
 
     this.codigoValido = true;
     this.tituloValido = true;

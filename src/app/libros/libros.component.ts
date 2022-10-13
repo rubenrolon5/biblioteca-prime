@@ -1,5 +1,5 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { Message } from 'primeng/api';
+import { ConfirmationService, Message } from 'primeng/api';
 import { Messages } from 'primeng/messages';
 import { Libro } from '../interfaces/libro.interface';
 import { FormularioLibroComponent } from '../libro/formulario-libro/formulario-libro.component';
@@ -19,7 +19,7 @@ dialogoVisible:boolean= false;// indica que el dialogo este visible
 
 mensajes: Message[]=[];
 tituloDialogo: string = 'Registrar libro';
-  constructor(private servicioLibros: LibrosService) { }
+  constructor(private servicioLibros: LibrosService, private servicioConfirm:ConfirmationService) { }
 
   ngOnInit(): void {
     this.cargarLibros();
@@ -55,5 +55,26 @@ tituloDialogo: string = 'Registrar libro';
     this.formLibro.modo ='Editar';
     this.dialogoVisible = true;
     this.tituloDialogo = "Editar libro";
+  }
+  eliminar(libro:Libro){
+    this.servicioConfirm.confirm({
+      message:"¿Realmente desea eliminar el libro:'"+libro.idlibro+"-"+libro.titulo+"-"+libro.autor+"'?'?",
+      acceptLabel:'Eliminar',
+      rejectLabel:'Canselar',
+      acceptButtonStyleClass:'p-button-danger',
+      acceptIcon:'pi pi-trash',
+      accept:()=>{
+        this.servicioLibros.delete(libro).subscribe({
+          next:()=>{
+            this.mensajes=[{severity:'success', summary:'Exito',detail:'Se elimino correctamente el libro'}],
+            this.cargarLibros();
+          },
+          error:(e) =>{
+            console.log(e);
+            this.mensajes=[{severity:'error',summary:'Error al eliminar',detail:e.error}];
+          }
+        });
+      }
+    });
   }
 }

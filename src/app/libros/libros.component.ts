@@ -43,6 +43,7 @@ tituloDialogo: string = 'Registrar libro';
   nuevo(){
     this.tituloDialogo ='Registrar libro';
     this.formLibro.limpiarFormulario();
+    this.formLibro.cargarAutores();
     this.formLibro.modo ='Registrar';
     this.dialogoVisible= true;
   }
@@ -50,7 +51,8 @@ tituloDialogo: string = 'Registrar libro';
     console.log(libro);
     this.formLibro.codigo= libro.idlibro;
     this.formLibro.titulo= libro.titulo;
-    this.formLibro.autor= libro.autor;
+    this.formLibro.idautor = libro.idautor;
+    this.formLibro.cargarAutores();
     this.formLibro.paginas= libro.paginas;
     this.formLibro.modo ='Editar';
     this.dialogoVisible = true;

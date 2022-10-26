@@ -3,4 +3,5 @@ export interface Libro{
     titulo: string|null;
     autor: string|null;
     paginas: number|null;
+    idautor:number|null;
 }

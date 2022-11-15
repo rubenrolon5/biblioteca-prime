@@ -20,12 +20,17 @@ import { ConfirmationService } from 'primeng/api';
 import { ConfirmDialogModule } from 'primeng/confirmdialog';
 import { HttpClientModule } from '@angular/common/http';
 import { DropdownModule } from 'primeng/dropdown';
+import { LoginComponent } from './login/login.component';
+import { MainAppComponent } from './main-app/main-app.component';
+import {PasswordModule}from'primeng/password';
 @NgModule({
   declarations: [
     AppComponent,
     AutoresComponent,
     LibrosComponent,
-    FormularioLibroComponent
+    FormularioLibroComponent,
+    LoginComponent,
+    MainAppComponent
   ],
   imports: [
     BrowserModule,
@@ -44,7 +49,8 @@ import { DropdownModule } from 'primeng/dropdown';
     MessagesModule,
     ConfirmDialogModule,
     HttpClientModule,
-    DropdownModule
+    DropdownModule,
+    PasswordModule
   ],
   providers: [ConfirmationService],
   bootstrap: [AppComponent]
